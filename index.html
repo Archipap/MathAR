@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.2/math.min.js"></script>
+        <script src="mathplane.js"></script>
+    </head>
+
+    <body style="margin: 0; overflow: hidden;">
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            shadow="castShadow: false; autoUpdate: false"
+            embedded
+            gesture-detector >
+
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="marker.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA">
+
+                <a-cylinder color="red" height="35" radius="0.05" rotation="0 0 90"></a-cylinder>
+                <a-cone color="red" height="1" radius-bottom="0.4" position="17.5 0 0" rotation="0 0 -90"></a-cone>
+
+                <a-cylinder color="green" height="35" radius="0.05" rotation="0 90 0"></a-cylinder>
+                <a-cone color="green" height="1" radius-bottom="0.4" position="0 17.5 0" rotation="0 90 0"></a-cone>
+
+                <a-cylinder color="blue" height="35" radius="0.05" rotation="90 0 0"></a-cylinder>
+                <a-cone color="blue" height="1" radius-bottom="0.4" position="0 0 17.5" rotation="90 0 0"></a-cone>
+
+                <a-entity id="mathplane" geometry="primitive: mathplane; mathfunc: x*z" material="shader: flat; side: double; vertexColors: face"></a-entity>
+            </a-marker>
+
+            <a-entity camera></a-entity>
+
+        </a-scene>
+    </body>
+</html>
